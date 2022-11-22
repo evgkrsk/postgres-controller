@@ -14,7 +14,7 @@ replicaCount: 1
 
 image:
   repository: evgkrsk/postgres-controller
-  tag: 0.6-rc1
+  tag: 0.6.0
   pullPolicy: IfNotPresent
 
 nameOverride: ""
