@@ -13,8 +13,8 @@ log_level: 'info'
 replicaCount: 1
 
 image:
-  repository: maxrocketinternet/postgres-controller
-  tag: 0.5
+  repository: evgkrsk/postgres-controller
+  tag: 0.6-rc1
   pullPolicy: IfNotPresent
 
 nameOverride: ""

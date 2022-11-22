@@ -4,6 +4,7 @@ metadata:
   name: app3
 spec:
   dbName: db3
+  dbOwner: user3
   dbRoleName: user3
   dbRolePassword: swordfish
   onDeletion:

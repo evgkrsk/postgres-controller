@@ -1,0 +1,55 @@
+name: Helm chart test workflow
+
+on:
+  pull_request:
+    branches: [master]
+  workflow_dispatch: {}
+  schedule:
+    - cron: "0 5 * * 5" # Every friday at 5 AM
+
+jobs:
+  test:
+    name: test helm chart
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: azure/setup-helm@v3.4
+      - name: helm lint
+        run: helm lint charts/postgres-controller
+
+      -
+        name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: evgkrsk/postgres-controller
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}.{{patch}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
+      -
+        name: Build docker image
+        id: build
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          push: false
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+      -
+        name: Run Trivy vulnerability scanner (CRIT only)
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'evgkrsk/postgres-controller:${{ steps.meta.outputs.version }}'
+          exit-code: '1'
+          ignore-unfixed: true
+          severity: 'CRITICAL'
+      -
+        name: Run Trivy vulnerability scanner (full list)
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'evgkrsk/postgres-controller:${{ steps.meta.outputs.version }}'

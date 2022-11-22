@@ -13,6 +13,7 @@ metadata:
   name: app1
 spec:
   dbName: db1
+  dbOwner: user1
   dbRoleName: user1
   dbRolePassword: swordfish
 ```
