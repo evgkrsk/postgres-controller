@@ -203,17 +203,17 @@ def process_event(crds, obj, event_type, runtime_config):
     elif event_type == 'ADDED':
         logger.info('Adding dbName {0} with owner {1}'.format(spec['dbName'], spec['dbOwner']))
 
-        db_created = create_db_if_not_exists(cur, spec['dbName'], spec['dbOwner'])
-        if db_created:
-            logger.info('Database {0} created'.format(spec['dbName']))
-        else:
-            logger.info('Database {0} already exists'.format(spec['dbName']))
-
         role_created = create_role_not_exists(cur, spec['dbRoleName'], spec['dbRolePassword'])
         if role_created:
             logger.info('Role {0} created'.format(spec['dbRoleName']))
         else:
             logger.info('Role {0} already exists'.format(spec['dbRoleName']))
+
+        db_created = create_db_if_not_exists(cur, spec['dbName'], spec['dbOwner'])
+        if db_created:
+            logger.info('Database {0} created with owner {1}'.format(spec['dbName'], spec['dbOwner']))
+        else:
+            logger.info('Database {0} already exists'.format(spec['dbName']))
 
         cur.execute("GRANT ALL PRIVILEGES ON DATABASE {0} to {1};".format(spec['dbName'], spec['dbRoleName']))
 
