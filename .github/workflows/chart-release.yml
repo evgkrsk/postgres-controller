@@ -3,8 +3,8 @@ name: Helm chart release workflow
 on:
   push:
     branches: [master]
-  paths:
-    - "charts/**"
+    paths:
+      - "charts/**"
 
 jobs:
   release-chart:
