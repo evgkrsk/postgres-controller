@@ -33,16 +33,23 @@ spec:
     type: string
     description: The name of the database
     JSONPath: .spec.dbName
+  - name: DBOWNER
+    type: string
+    description: The owner of the database
+    JSONPath: .spec.dbOwner
   validation:
     openAPIV3Schema:
       properties:
         spec:
           required:
           - dbName
+          - dbOwner
           - dbRoleName
           - dbRolePassword
           properties:
             dbName:
+              type: string
+            dbOwner:
               type: string
             dbRoleName:
               type: string

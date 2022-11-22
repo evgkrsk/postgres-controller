@@ -111,13 +111,13 @@ def parse_too_old_failure(message):
         return None
 
 
-def create_db_if_not_exists(cur, db_name):
+def create_db_if_not_exists(cur, db_name, db_owner):
     '''
     A function to create a database if it does not already exist
     '''
     cur.execute("SELECT 1 FROM pg_database WHERE datname = '{}';".format(db_name))
     if not cur.fetchone():
-        cur.execute("CREATE DATABASE {};".format(db_name))
+        cur.execute("CREATE DATABASE {0} OWNER {1};".format(db_name, db_owner))
         return True
     else:
         return False
@@ -201,9 +201,9 @@ def process_event(crds, obj, event_type, runtime_config):
 
 
     elif event_type == 'ADDED':
-        logger.info('Adding dbName {0}'.format(spec['dbName']))
+        logger.info('Adding dbName {0} with owner {1}'.format(spec['dbName'], spec['dbOwner']))
 
-        db_created = create_db_if_not_exists(cur, spec['dbName'])
+        db_created = create_db_if_not_exists(cur, spec['dbName'], spec['dbOwner'])
         if db_created:
             logger.info('Database {0} created'.format(spec['dbName']))
         else:
