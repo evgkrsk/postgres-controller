@@ -5,6 +5,7 @@ metadata:
   name: app1
 spec:
   dbName: db1
+  dbOwner: user1
   dbRoleName: user1
   dbRolePassword: swordfish
   # This string must correspond to a key in one of `postgres_instances` in the config file
@@ -16,6 +17,7 @@ metadata:
   name: app2
 spec:
   dbName: db2
+  dbOwner: user2
   dbRoleName: user2
   dbRolePassword: swordfish
   # This string must correspond to a key in one of `postgres_instances` in the config file

@@ -4,6 +4,7 @@ metadata:
   name: app4
 spec:
   dbName: db4
+  dbOwner: user4
   dbRoleName: user4
   dbRolePassword: swordfish
   dbExtensions:
