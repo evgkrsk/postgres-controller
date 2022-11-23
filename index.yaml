@@ -3,6 +3,15 @@ entries:
   postgres-controller:
   - apiVersion: v2
     appVersion: 0.6.1
+    created: "2022-11-23T06:46:19.609567305Z"
+    description: A controller for managing PostgreSQL databases, roles and more
+    digest: b8bfdf1122ef583e0bdeba577f9b9b58d13011d63006f5d079ed0a74766b030b
+    name: postgres-controller
+    urls:
+    - https://github.com/evgkrsk/postgres-controller/releases/download/postgres-controller-1.3.5/postgres-controller-1.3.5.tgz
+    version: 1.3.5
+  - apiVersion: v2
+    appVersion: 0.6.1
     created: "2022-11-22T17:47:40.443091428Z"
     description: A controller for managing PostgreSQL databases, roles and more
     digest: 6845119bdd022563fcf61dff1f1fc4bc0789b5ef2c123ce172e7bc38ed10d6fa
@@ -28,4 +37,4 @@ entries:
     urls:
     - https://github.com/evgkrsk/postgres-controller/releases/download/postgres-controller-1.3.2/postgres-controller-1.3.2.tgz
     version: 1.3.2
-generated: "2022-11-22T17:47:40.443107629Z"
+generated: "2022-11-23T06:46:19.609580205Z"
