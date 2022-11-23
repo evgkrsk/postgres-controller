@@ -44,5 +44,5 @@ rules:
     level: warning
     allowed-values: ['true', 'false', 'yes', 'no', 'True', 'False', 'on']
 ignore: |
-  charts/postgres-controller/
+  charts/postgres-controller/templates
 ...

@@ -23,7 +23,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        checksum/config: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
       labels:
         app.kubernetes.io/name: {{ include "postgres-controller.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
@@ -36,7 +36,7 @@ spec:
       serviceAccountName: {{ template "postgres-controller.serviceAccountName" . }}
       containers:
         - name: {{ .Chart.Name }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: CONFIG_FILE
@@ -50,8 +50,8 @@ spec:
               mountPath: /config
       volumes:
         - name: config
-          configMap:
-            name: {{ include "postgres-controller.fullname" . }}
+          secret:
+            secretName: {{ include "postgres-controller.fullname" . }}
     {{- if .Values.nodeSelector }}
       nodeSelector:
 {{ toYaml .Values.nodeSelector | indent 8 }}

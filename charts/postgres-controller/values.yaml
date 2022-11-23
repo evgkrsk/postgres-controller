@@ -1,7 +1,7 @@
 # Controller configuration
 # Contains list of Postgres instances. Should have at least a `default` instance
 config:
-  postgres_instances:
+  postgres_instances: {}
     # default:
       # host: ""
       # user: ""
@@ -14,7 +14,7 @@ replicaCount: 1
 
 image:
   repository: evgkrsk/postgres-controller
-  tag: 0.6.1
+  tag: ""                       # default is .Chart.AppVersion
   pullPolicy: IfNotPresent
 
 nameOverride: ""
@@ -36,4 +36,4 @@ serviceAccount:
   create: true
   # The name of the ServiceAccount to use.
   # If not set and create is true, a name is generated using the fullname template
-  name:
+  name: ""
